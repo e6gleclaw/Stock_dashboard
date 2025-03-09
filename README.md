@@ -21,10 +21,11 @@ You can access it here: https://stockdashborad.netlify.app/
 ```sh
 git clone https://github.com/e6gleclaw/Stock_dashboard
 cd my-nextjs-project
-
+```
 ### 2**Install dependencies**
 npm install
 
+```ah
 ### 3**Run the development server**
 npm run dev
 
