@@ -22,10 +22,10 @@ You can access it here: https://stockdashborad.netlify.app/
 git clone https://github.com/e6gleclaw/Stock_dashboard
 cd my-nextjs-project
 
-Install dependencies:
+### 2**Install dependencies**
 npm install
 
-Run the development server:
+### 3**Run the development server**
 npm run dev
 
 The app runs at: http://localhost:3000
