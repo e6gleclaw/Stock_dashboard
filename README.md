@@ -13,7 +13,7 @@ This is a **Next.js** project that has been successfully deployed on **Netlify**
 
 ## 🚀 Deployment
 This project is deployed on **Netlify**.  
-You can access it here: https://stockdashborad.netlify.app/
+You can access it here: https://stockdashboard1.netlify.app/
 
 
 ## 🛠️ **Installation & Setup**
