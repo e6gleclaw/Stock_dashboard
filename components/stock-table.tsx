@@ -31,6 +31,24 @@ interface StockTableProps {
 
 const columnHelper = createColumnHelper<Stock>();
 
+// Add this new function at the top level
+const formatLastUpdated = (timestamp: string | undefined) => {
+  if (!timestamp) return "N/A";
+  try {
+    // Create a new Date object and format it
+    const date = new Date(timestamp);
+    if (isNaN(date.getTime())) return "N/A";
+
+    return date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
+  } catch (error) {
+    return "N/A";
+  }
+};
+
 export function StockTable({
   stocks,
   sectorSummaries,
@@ -345,9 +363,9 @@ export function StockTable({
               {Object.entries(stocksBySectorGrouped).map(
                 ([sector, sectorStocks]) => {
                   const sectorSummary = sectorSummaryMap[sector];
-                  const lastUpdated = sectorStocks[0]?.lastUpdated
-                    ? new Date(sectorStocks[0].lastUpdated).toLocaleTimeString()
-                    : "N/A";
+                  const lastUpdated = formatLastUpdated(
+                    sectorStocks[0]?.lastUpdated
+                  );
 
                   return (
                     <React.Fragment key={sector}>
@@ -362,13 +380,12 @@ export function StockTable({
                                 ({sectorStocks.length} stocks)
                               </span>
                             </div>
-                            <div className='text-xs text-gray-500'>
+                            {/* <div className='text-xs text-gray-500'>
                               Last updated: {lastUpdated}
-                            </div>
+                            </div> */}
                           </div>
                         </td>
                       </tr>
-
                       {sectorStocks.map((stock) => (
                         <tr
                           key={stock.id}
