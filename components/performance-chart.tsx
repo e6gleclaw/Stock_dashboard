@@ -71,39 +71,24 @@ export function PerformanceChart({ stocks }: PerformanceChartProps) {
           <BarChart
             data={data}
             layout='vertical'
-            margin={{ top: 5, right: 120, left: 100, bottom: 5 }}
-            barCategoryGap={12}
+            margin={{ top: 5, right: 30, left: 100, bottom: 5 }}
           >
-            <CartesianGrid
-              strokeDasharray='3 3'
-              horizontal={false}
-              stroke='#374151'
-              opacity={0.5}
-            />
+            <CartesianGrid strokeDasharray='3 3' stroke='#374151' />
             <XAxis
               type='number'
-              domain={["dataMin - 1", "dataMax + 1"]}
+              domain={["auto", "auto"]}
               tickFormatter={(value) => `${value}%`}
-              tick={{ fill: "#9CA3AF", fontSize: 11 }}
-              axisLine={{ stroke: "#4B5563" }}
-              tickLine={{ stroke: "#4B5563" }}
-              padding={{ left: 10, right: 10 }}
+              stroke='#9CA3AF'
+              tick={{ fill: "#9CA3AF" }}
             />
             <YAxis
               type='category'
               dataKey='name'
-              width={90}
-              tick={{ fontSize: 11, fill: "#9CA3AF" }}
-              axisLine={{ stroke: "#4B5563" }}
-              tickLine={{ stroke: "#4B5563" }}
-              tickFormatter={(value) =>
-                value.length > 6 ? `${value.slice(0, 6)}...` : value
-              }
+              width={80}
+              stroke='#9CA3AF'
+              tick={{ fill: "#9CA3AF" }}
             />
-            <Tooltip
-              content={<CustomTooltip />}
-              cursor={{ fill: "#1F2937", opacity: 0.2 }}
-            />
+            <Tooltip content={<CustomTooltip />} />
             <Bar
               dataKey='value'
               radius={[0, 4, 4, 0]}
@@ -114,7 +99,7 @@ export function PerformanceChart({ stocks }: PerformanceChartProps) {
                 formatter: (value: number) => `${value}%`,
                 fill: "#9CA3AF",
                 fontSize: 11,
-                dx: 8,
+                dx: 58,
                 dy: 0,
                 className: "bar-label",
               }}

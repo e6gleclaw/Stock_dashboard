@@ -13,7 +13,7 @@ import {
   type ColumnDef,
   type SortingState,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ArrowUp, ArrowDown, Trash2 } from "lucide-react";
+import { ArrowUpDown, ArrowUp, ArrowDown, Trash2, Pencil } from "lucide-react";
 import type { Stock, SectorSummary } from "@/types/stock";
 import {
   calculateInvestment,
@@ -600,10 +600,10 @@ export function StockTable({
                   [stock.id]: stock.quantity,
                 }));
               }}
-              className='cursor-pointer hover:bg-gray-700/60 py-1 px-2 rounded text-right flex justify-end items-center'
+              className='cursor-pointer hover:bg-gray-700/60 py-1 px-2 rounded text-right flex justify-end items-center gap-2 group'
             >
               <span>{currentQuantity}</span>
-              <span className='ml-2 text-gray-500 text-xs'>(Edit)</span>
+              <Pencil className='h-3 w-3 text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity' />
             </div>
           );
         },

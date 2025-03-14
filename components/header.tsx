@@ -47,7 +47,7 @@ function SummaryCard({ title, value, subtitle, valueClassName }: SummaryCardProp
   return (
     <div className="rounded-lg border bg-card p-4 shadow-sm">
       <div className="text-sm font-medium text-muted-foreground">{title}</div>
-      <div className={`mt-1 text-2xl font-bold ${valueClassName}`}>{value}</div>
+      <div className={`mt-1 text-2xl text-black font-bold ${valueClassName}`}>{value}</div>
       <div className="mt-1 text-xs text-muted-foreground">{subtitle}</div>
     </div>
   )
