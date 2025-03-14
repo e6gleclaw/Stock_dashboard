@@ -16,6 +16,15 @@ export default function Dashboard() {
   const [stocks, setStocks] = useState<Stock[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [sectorSummaries, setSectorSummaries] = useState<SectorSummary[]>([]);
+  const [portfolioSummary, setPortfolioSummary] = useState<PortfolioSummary>({
+    totalInvestment: 0,
+    totalValue: 0,
+    totalGainLoss: 0,
+    totalGainLossPercentage: 0,
+    sectorCount: 0,
+    stockCount: 0,
+  });
 
   const fetchStocks = useCallback(async () => {
     try {
@@ -43,21 +52,46 @@ export default function Dashboard() {
     fetchStocks();
   }, [fetchStocks]);
 
-  // Calculate portfolio summary and sector summaries
-  const portfolioSummary: PortfolioSummary = stocks.length
-    ? calculatePortfolioSummary(stocks)
-    : {
+  // Update portfolio summary and sector summaries when stocks change
+  useEffect(() => {
+    if (stocks.length) {
+      const newPortfolioSummary = calculatePortfolioSummary(stocks);
+      setPortfolioSummary(newPortfolioSummary);
+
+      const newSectorSummaries = calculateSectorSummaries(
+        stocks,
+        newPortfolioSummary.totalInvestment
+      );
+      setSectorSummaries(newSectorSummaries);
+    } else {
+      setPortfolioSummary({
         totalInvestment: 0,
         totalValue: 0,
         totalGainLoss: 0,
         totalGainLossPercentage: 0,
         sectorCount: 0,
         stockCount: 0,
-      };
+      });
+      setSectorSummaries([]);
+    }
+  }, [stocks]);
 
-  const sectorSummaries: SectorSummary[] = stocks.length
-    ? calculateSectorSummaries(stocks, portfolioSummary.totalInvestment)
-    : [];
+  // Handle data changes from StockTable
+  const handleDataChange = useCallback(
+    (data: {
+      stocks: Stock[];
+      sectorSummaries: SectorSummary[];
+      totalInvestment: number;
+    }) => {
+      setStocks(data.stocks);
+      setSectorSummaries(data.sectorSummaries);
+      setPortfolioSummary((prev) => ({
+        ...prev,
+        totalInvestment: data.totalInvestment,
+      }));
+    },
+    []
+  );
 
   return (
     <div className='min-h-screen bg-gradient-to-b from-gray-900 to-gray-800'>
@@ -81,6 +115,7 @@ export default function Dashboard() {
               sectorSummaries={sectorSummaries}
               totalInvestment={portfolioSummary.totalInvestment}
               onRefresh={fetchStocks}
+              onDataChange={handleDataChange}
             />
 
             <div className='grid gap-6 md:grid-cols-2'>

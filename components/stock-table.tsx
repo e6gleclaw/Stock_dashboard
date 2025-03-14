@@ -349,7 +349,7 @@ export function StockTable({
         // Set flag to skip next props update
         sessionStorage.setItem("skipNextPropsUpdate", "true");
 
-        // Notify parent
+        // Notify parent with updated data
         if (onDataChange) {
           onDataChange({
             stocks: updatedStocks,
@@ -357,9 +357,6 @@ export function StockTable({
             totalInvestment: newTotalInvestment,
           });
         }
-
-        // Call refresh
-        onRefresh();
 
         console.log("Stock added successfully");
       } catch (error) {
@@ -369,13 +366,7 @@ export function StockTable({
         setIsLoadingStock(false);
       }
     },
-    [
-      localStocks,
-      onRefresh,
-      onDataChange,
-      recalculateSectorSummaries,
-      deletedStockIds,
-    ]
+    [localStocks, onDataChange, recalculateSectorSummaries, deletedStockIds]
   );
 
   // Handle deleting a stock
@@ -432,12 +423,9 @@ export function StockTable({
         });
       }
 
-      // Call refresh
-      onRefresh();
-
       console.log("Stock deleted, remaining stocks:", updatedStocks.length);
     },
-    [localStocks, onRefresh, onDataChange, recalculateSectorSummaries]
+    [localStocks, onDataChange, recalculateSectorSummaries]
   );
 
   // Fix the availableStocksForDropdown logic to exclude stocks already in the table

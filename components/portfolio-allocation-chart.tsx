@@ -32,7 +32,7 @@ export function PortfolioAllocationChart({
           <p className='text-sm text-gray-400'>
             Value:{" "}
             <span className='text-emerald-400'>
-              ₹{payload[0].payload.value.toLocaleString("en-IN")}
+              ₹{payload[0].payload.actualValue.toLocaleString("en-IN")}
             </span>
           </p>
         </div>
@@ -48,16 +48,20 @@ export function PortfolioAllocationChart({
     actualValue: sector.presentValue,
   }));
 
-  // Custom colors for sectors
+  // Custom colors for sectors - expanded color palette
   const COLORS = [
-    "#10B981",
-    "#3B82F6",
-    "#6366F1",
-    "#8B5CF6",
-    "#EC4899",
-    "#F43F5E",
-    "#F97316",
-    "#EAB308",
+    "#10B981", // Emerald
+    "#3B82F6", // Blue
+    "#6366F1", // Indigo
+    "#8B5CF6", // Purple
+    "#EC4899", // Pink
+    "#F43F5E", // Rose
+    "#F97316", // Orange
+    "#EAB308", // Yellow
+    "#14B8A6", // Teal
+    "#06B6D4", // Cyan
+    "#A855F7", // Violet
+    "#EF4444", // Red
   ];
 
   return (
@@ -118,7 +122,7 @@ export function PortfolioAllocationChart({
           </PieChart>
         </ResponsiveContainer>
       </div>
-      <div className='mt-4 grid grid-cols-2 gap-2 text-sm'>
+      <div className='mt-4 grid grid-cols-2 gap-2'>
         {data.map((item, index) => (
           <div key={item.name} className='flex items-center gap-2'>
             <div
